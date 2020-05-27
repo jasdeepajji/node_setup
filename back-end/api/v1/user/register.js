@@ -17,7 +17,7 @@ const validator = createValidator({ passError: true });
  *  post:
  *   tags: ["user"]
  *   summary: user register api
- *   description: api used to register users
+ *   description: api used to register users.<br/><b>role</b> should be 2 => client, 3 => trader
  *   parameters:
  *      - in: body
  *        name: user

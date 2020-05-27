@@ -55,7 +55,7 @@ export const checkToken = async (req, res, next) => {
   }
   const user = await User.checkToken(token);
   if (user) {
-    req.user = decoded;
+    req.user = {...decoded, token};
     next();
   } else {
     res.status(401).json(failAction(Message.unauthorizedUser, 401));

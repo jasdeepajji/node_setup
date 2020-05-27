@@ -9,5 +9,6 @@ import login from './login';
 import socialLogin from './social-login';
 import forgotPassword from './forgot-password';
 import changePassword from './change-password';
+import logout from './logout';
 
-export default [regiter, login, socialLogin, forgotPassword, changePassword];
+export default [regiter, login, socialLogin, forgotPassword, changePassword, logout];

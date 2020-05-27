@@ -152,3 +152,11 @@ export const forgotPass = async (payload) => {
 export const updatePassword = async (payload) => {
     return await User.updateUser(payload.userId, {password: await encryptpassword(payload.password)});
 }
+/*********** User logout ************/
+export const userLogout = async (payload) => {
+    return await User.updateUser(payload.userId, {
+        'device.token': '',
+        'device.type': '',
+        'loginToken.token': '',
+    });
+}

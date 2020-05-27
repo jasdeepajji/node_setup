@@ -17,7 +17,7 @@ const validator = createValidator({ passError: true });
  *  post:
  *   tags: ["user"]
  *   summary: user social login api
- *   description: api used to social login users<br/><b>Note:-</b> device is optional and <b>device type</b> should be one of ios or android<br/><b>social key</b> should be one of fbId, googleId, twitterId.
+ *   description: api used to social login users<br/><b>Note:-</b> device is optional and <b>device type</b> should be one of ios or android<br/><b>social key</b> should be one of fbId, googleId, twitterId.<br/><b>role</b> should be 2 => client, 3 => trader.
  *   parameters:
  *      - in: body
  *        name: user

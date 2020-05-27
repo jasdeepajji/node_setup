@@ -5,7 +5,7 @@
  */
 
 import { successAction, failAction } from '../utilities/response';
-import { save, onLogin, onSocialLogin, forgotPass, updatePassword } from '../services/user';
+import { save, onLogin, onSocialLogin, forgotPass, updatePassword, userLogout } from '../services/user';
 import Message from '../utilities/messages';
 
 /**************** User signup/register ***********/
@@ -58,4 +58,15 @@ export const changePassword = async (req, res, next) => {
     } catch (error) {
         res.status(400).json(failAction(error.message));
     }
-};
+}; 
+/*********** Logout user *************/
+export const logout = async (req, res, next) => {
+    payload.userId = req.user._id;
+    payload.token = req.user.token;
+    try {
+        await userLogout(payload);
+        res.status(200).json(successAction(null, Message.success));
+    } catch (error) {
+        res.status(400).json(failAction(error.message));
+    }
+}; 
