@@ -17,7 +17,7 @@ const validator = createValidator({ passError: true });
  *  post:
  *   tags: ["user"]
  *   summary: user social login api
- *   description: api used to social login users<br/><b>Note:-</b> device is optional and <b>device type</b> should be one of ios or android<br/><b>social key</b> should be one of fbId, googleId, twitterId.<br/><b>role</b> should be 2 => client, 3 => trader.
+ *   description: api used to social login users<br/><b>Note:-</b> device is optional and <b>device type</b> should be one of ios or android<br/><b>social key</b> should be one of fbId, googleId, twitterId.<br/><b>role</b> should be 2 => client, 3 => trader.<br/><b>location</b> coordinates should be array like <b>[long, lat]</b>.
  *   parameters:
  *      - in: body
  *        name: user
@@ -55,6 +55,18 @@ const validator = createValidator({ passError: true });
  *               type: string   
  *               required:
  *             required:
+ *           country:
+ *             type: string
+ *           address:
+ *             type: string
+ *           location:
+ *             type: object
+ *             properties:
+ *              coordinates:
+ *               type: array
+ *               items:
+ *                type: number      
+ *               required:
  *           role:
  *             type: integer
  *             required:
@@ -112,7 +124,22 @@ const loginSchema = Joi.object({
                 .label("Social Type")
         })
         .required()
-        .label("Social detail"),
+        .label("Social detail"),      
+    country: Joi.string()
+        .trim()
+        .optional()
+        .allow('')
+        .label("Country"),    
+    address: Joi.string()
+        .trim()        
+        .optional()
+        .allow('')
+        .label("Address"),
+    location: Joi.object({
+        coordinates: Joi.array().required().label("coordinates")
+        })        
+        .optional()
+        .label("location"),
     role: Joi.number()
         .valid(ROLE.client, ROLE.trader)
         .required()

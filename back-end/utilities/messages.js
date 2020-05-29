@@ -7,7 +7,7 @@ export default {
   confirm: 'Confirmed',
   success: 'Success!',
   systemError: 'Technical error ! Please try again later.',
-  userNameAlreadyExists: 'Username is already registered.',
+  userNameAlreadyExists: 'Username is already exist!',
   emailAlreadyExists: 'Email is already registered with us.',
   emailNotExists: 'Email is not registered with us.',
   phoneNumberNotExists: 'Phone Number not registered.',
@@ -36,5 +36,11 @@ export default {
   /*************** Game Play **************/
   scoreUpdated: "Game score successfully updated.",
   paymentFaild: "Please try again!",
-  noCompetitionActive: "No Active competition!"
+  noCompetitionActive: "No Active competition!",
+  /********* OTP ************/
+  otpSent: "OTP sent on your number.",
+  invalidOtp: "Invalid OTP!.",
+  otpVerified: "OTP is successfully verified.",
+  otpMessage: otp => `hi\n your otp is: ${otp}.`,
+  otpSubject: "OTP"
 };

@@ -21,25 +21,22 @@ class UserClass {
     return this(payload).save();
   }
   static onLoginDone(userId, data, type = 'default') {
-    let payload = {
-      'loginToken.token': data.token,
-      'loginToken.createdAt': new Date(),
-      'lastLogin.loginDate': new Date(),
-      'lastLogin.type': type
-    };
+    let payload = {token: data.token};
     if(data['device']){
       const device = data.device;
-      delete data.device;
       payload = {
         ...payload,
-        'device.token': device.token,
-        'device.type': device.type
+        deviceToken: device.token,
+        deviceType: device.type
       }
     }
     let updateData = {
-      $set: payload
+      $push: { loginToken: payload },
+      $set: {
+        'lastLogin.loginDate': new Date(),
+        'lastLogin.type': type
+      }
     };
-
     return this.findByIdAndUpdate(userId, updateData, { new: true });
   }
   static logout(userId, token) {

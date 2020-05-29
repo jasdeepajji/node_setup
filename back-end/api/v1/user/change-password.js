@@ -17,7 +17,7 @@ const validator = createValidator({ passError: true });
  *  put:
  *   tags: ["user"]
  *   summary: Change password api for all Users
- *   description: api used to change password password users.
+ *   description: api used to change password for users.
  *   security:
  *    - OAuth2: [admin]   # Use Authorization
  *   parameters:

@@ -5,7 +5,7 @@
  */
 
 import { successAction, failAction } from '../utilities/response';
-import { save, onLogin, onSocialLogin, forgotPass, updatePassword, userLogout } from '../services/user';
+import { save, onLogin, onSocialLogin, forgotPass, updatePassword, userLogout, usernames, OTP } from '../services/user';
 import Message from '../utilities/messages';
 
 /**************** User signup/register ***********/
@@ -61,7 +61,7 @@ export const changePassword = async (req, res, next) => {
 }; 
 /*********** Logout user *************/
 export const logout = async (req, res, next) => {
-    payload.userId = req.user._id;
+    const payload = {userId: req.user._id};
     payload.token = req.user.token;
     try {
         await userLogout(payload);
@@ -70,3 +70,25 @@ export const logout = async (req, res, next) => {
         res.status(400).json(failAction(error.message));
     }
 }; 
+/*********** Verify username and list down sugestion *************/
+export const verifyUsername = async (req, res, next) => {
+    const payload = req.query;
+    try {
+        const data = await usernames(payload);
+        res.status(200).json(successAction(data, Message.success));
+    } catch (error) {
+        res.status(400).json(failAction(error.message));
+    }
+};  
+/************* Send and verify OTP for number verification ***************/
+export const verifyOTP = async (req, res, next) => {
+    const payload = req.body;
+    payload.userId = req.user._id;
+    try {
+        const message = payload.type === 'send_otp' ? Message.otpSent : Message.otpVerified;
+        await OTP(payload);
+        res.status(200).json(successAction(null, message));
+    } catch (error) {
+        res.status(400).json(failAction(error.message));
+    }
+};  
