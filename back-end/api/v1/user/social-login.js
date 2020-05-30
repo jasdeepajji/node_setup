@@ -40,19 +40,19 @@ const validator = createValidator({ passError: true });
  *             type: object
  *             properties:
  *              token:
- *               type: string   
+ *               type: string
  *               required:
  *              type:
- *               type: string   
+ *               type: string
  *               required:
  *           social:
  *             type: object
  *             properties:
  *              key:
- *               type: string   
+ *               type: string
  *               required:
  *              value:
- *               type: string   
+ *               type: string
  *               required:
  *             required:
  *           country:
@@ -65,7 +65,7 @@ const validator = createValidator({ passError: true });
  *              coordinates:
  *               type: array
  *               items:
- *                type: number      
+ *                type: number
  *               required:
  *           role:
  *             type: integer
@@ -78,76 +78,52 @@ const validator = createValidator({ passError: true });
  */
 
 const loginSchema = Joi.object({
-    firstName: Joi.string()
-        .trim()
-        .required()
-        .label("First Name"),
-    lastName: Joi.string()
-        .trim()
-        .optional()
-        .allow('')
-        .label("Last Name"),
-    email: Joi.string()
-        .trim()
-        .email()
-        .lowercase()
-        .optional()
-        .allow('')
-        .label("Email"),
-    profileImage: Joi.string()
-        .optional()
-        .trim()
-        .allow('')
-        .label("Profile Image"),
-    device: Joi.object({            
-            token: Joi.string()
-                .trim()
-                .required()
-                .label("Device Token"),            
-            type: Joi.string()
-                .trim()
-                .required()
-                .valid(DEVICE.ios, DEVICE.android)
-                .label("Device Type")
-        })
-        .optional()
-        .label("Device detail"),
-    social: Joi.object({            
-            value: Joi.string()
-                .trim()
-                .required()
-                .label("Social Id value"),            
-            key: Joi.string()
-                .trim()
-                .required()
-                .valid(SOCIAL.fbId, SOCIAL.googleId, SOCIAL.twitterId)
-                .label("Social Type")
-        })
-        .required()
-        .label("Social detail"),      
-    country: Joi.string()
-        .trim()
-        .optional()
-        .allow('')
-        .label("Country"),    
-    address: Joi.string()
-        .trim()        
-        .optional()
-        .allow('')
-        .label("Address"),
-    location: Joi.object({
-        coordinates: Joi.array().required().label("coordinates")
-        })        
-        .optional()
-        .label("location"),
-    role: Joi.number()
-        .valid(ROLE.client, ROLE.trader)
-        .required()
-        .label("Role")
+  firstName: Joi.string().trim().required().label('First Name'),
+  lastName: Joi.string().trim().optional().allow('').label('Last Name'),
+  email: Joi.string()
+    .trim()
+    .email()
+    .lowercase()
+    .optional()
+    .allow('')
+    .label('Email'),
+  profileImage: Joi.string().optional().trim().allow('').label('Profile Image'),
+  device: Joi.object({
+    token: Joi.string().trim().required().label('Device Token'),
+    type: Joi.string()
+      .trim()
+      .required()
+      .valid(DEVICE.ios, DEVICE.android)
+      .label('Device Type'),
+  })
+    .optional()
+    .label('Device detail'),
+  social: Joi.object({
+    value: Joi.string().trim().required().label('Social Id value'),
+    key: Joi.string()
+      .trim()
+      .required()
+      .valid(SOCIAL.fbId, SOCIAL.googleId, SOCIAL.twitterId)
+      .label('Social Type'),
+  })
+    .required()
+    .label('Social detail'),
+  country: Joi.string().trim().optional().allow('').label('Country'),
+  address: Joi.string().trim().optional().allow('').label('Address'),
+  location: Joi.object({
+    coordinates: Joi.array().required().label('coordinates'),
+  })
+    .optional()
+    .label('location'),
+  role: Joi.number().valid(ROLE.client, ROLE.trader).required().label('Role'),
 });
 
-app.post('/user/social-login', validator.body(loginSchema, {
-    joi: { convert: true, allowUnknown: false }
-}), socialLogin);
+app.post(
+  '/user/social-login',
+  validator.body(loginSchema, {
+    joi: { convert: true, allowUnknown: false },
+  }),
+  socialLogin,
+);
 
 export default app;

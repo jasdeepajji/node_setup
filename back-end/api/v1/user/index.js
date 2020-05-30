@@ -13,4 +13,13 @@ import logout from './logout';
 import verifyUsername from './verify-username';
 import numberOtp from './number-otp';
 
-export default [regiter, login, socialLogin, forgotPassword, changePassword, logout, verifyUsername, numberOtp];
+export default [
+  regiter,
+  login,
+  socialLogin,
+  forgotPassword,
+  changePassword,
+  logout,
+  verifyUsername,
+  numberOtp,
+];

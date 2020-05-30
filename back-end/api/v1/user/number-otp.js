@@ -3,11 +3,11 @@
  * @description: It Contain verify-number router/api.
  * @author: Jasdeep Singh
  */
-import express from "express";
+import express from 'express';
 import { createValidator } from 'express-joi-validation';
 import Joi from '@hapi/joi';
-import { verifyOTP } from "../../../controllers/user";
-import { checkToken } from "../../../utilities/universal";
+import { verifyOTP } from '../../../controllers/user';
+import { checkToken } from '../../../utilities/universal';
 
 const app = express();
 const validator = createValidator({ passError: true });
@@ -18,7 +18,7 @@ const validator = createValidator({ passError: true });
  *  post:
  *   tags: ["user"]
  *   summary: Send OTP and verify otp api
- *   description: api used to send OTP and verify OTP.<br/><b>type</b> should be one of send_otp OR verify_otp   
+ *   description: api used to send OTP and verify OTP.<br/><b>type</b> should be one of send_otp OR verify_otp.
  *   security:
  *    - OAuth2: [admin]   # Use Authorization
  *   parameters:
@@ -47,19 +47,21 @@ const validator = createValidator({ passError: true });
  *     description: fail
  */
 const userSchema = Joi.object({
-    number: Joi.string()
-        .trim()
-        .required()
-        .label("Number"),
-    type: Joi.string()
-        .trim()
-        .required()
-        .valid("send_otp","verify_otp")
-        .label("Type")
+  number: Joi.string().trim().required().label('Number'),
+  type: Joi.string()
+    .trim()
+    .required()
+    .valid('send_otp', 'verify_otp')
+    .label('Type'),
 });
 
-app.post("/user/otp", validator.body(userSchema, {
-    joi: { convert: true, allowUnknown: false }
-}), checkToken, verifyOTP);
+app.post(
+  '/user/otp',
+  validator.body(userSchema, {
+    joi: { convert: true, allowUnknown: false },
+  }),
+  checkToken,
+  verifyOTP,
+);
 
 export default app;

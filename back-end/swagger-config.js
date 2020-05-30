@@ -18,7 +18,7 @@ const swaggerOptions = {
             },
             servers: `${host}${port}`
         },
-        produces: ["application/json"]
+        produces: ['application/json']
     },
     apis: ['./*/*/*/*.js']
 };

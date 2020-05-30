@@ -9,7 +9,8 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    default: '',
+    unique: true,
+    required: true
   },
   firstName: {
     type: String,
@@ -56,7 +57,7 @@ const userSchema = new mongoose.Schema({
   },
   followers: [
     {
-      _id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      _id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       createdAt: {
         type: Date,
         default: new Date()
@@ -96,4 +97,4 @@ const userSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-export default userSchema.index( { location : "2dsphere" } );
+export default userSchema.index( { location : '2dsphere' } );

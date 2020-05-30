@@ -38,10 +38,10 @@ const validator = createValidator({ passError: true });
  *             type: object
  *             properties:
  *              token:
- *               type: string   
+ *               type: string
  *               required:
  *              type:
- *               type: string   
+ *               type: string
  *               required:
  *   responses:
  *    '200':
@@ -51,33 +51,26 @@ const validator = createValidator({ passError: true });
  */
 
 const loginSchema = Joi.object({
-    email: Joi.string()
-        .trim()
-        .email()
-        .lowercase()
-        .required()
-        .label("Email"),
-    password: Joi.string()
-        .required()
-        .trim()
-        .label("Password"),
-    device: Joi.object({            
-            token: Joi.string()
-                .trim()
-                .required()
-                .label("Device Token"),            
-            type: Joi.string()
-                .trim()
-                .required()
-                .valid(DEVICE.ios, DEVICE.android)
-                .label("Device Type")
-        })
-        .optional()
-        .label("Device detail")
+  email: Joi.string().trim().email().lowercase().required().label('Email'),
+  password: Joi.string().required().trim().label('Password'),
+  device: Joi.object({
+    token: Joi.string().trim().required().label('Device Token'),
+    type: Joi.string()
+      .trim()
+      .required()
+      .valid(DEVICE.ios, DEVICE.android)
+      .label('Device Type'),
+  })
+    .optional()
+    .label('Device detail'),
 });
 
-app.post('/user/login', validator.body(loginSchema, {
-    joi: { convert: true, allowUnknown: false }
-}), login);
+app.post(
+  '/user/login',
+  validator.body(loginSchema, {
+    joi: { convert: true, allowUnknown: false },
+  }),
+  login,
+);
 
 export default app;

@@ -3,10 +3,10 @@
  * @description: It Contain verify-username router/api.
  * @author: Jasdeep Singh
  */
-import express from "express";
-import { createValidator } from "express-joi-validation";
-import Joi from "@hapi/joi";
-import { verifyUsername } from "../../../controllers/user";
+import express from 'express';
+import { createValidator } from 'express-joi-validation';
+import Joi from '@hapi/joi';
+import { verifyUsername } from '../../../controllers/user';
 const app = express();
 const validator = createValidator({ passError: true });
 
@@ -29,20 +29,16 @@ const validator = createValidator({ passError: true });
  *      description: fail
  */
 
-
 const userSchema = Joi.object({
-username: Joi.string()
-    .trim()
-    .required()
-    .label("Username")
+  username: Joi.string().trim().required().label('Username'),
 });
 
 app.get(
-  "/user/verify-username",
+  '/user/verify-username',
   validator.query(userSchema, {
-    joi: { convert: true, allowUnknown: false }
+    joi: { convert: true, allowUnknown: false },
   }),
-  verifyUsername
+  verifyUsername,
 );
 
 export default app;

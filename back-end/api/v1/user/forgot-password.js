@@ -3,10 +3,10 @@
  * @description: It Contain forgot-password router/api.
  * @author: Jasdeep Singh
  */
-import express from "express";
-import { createValidator } from "express-joi-validation";
-import Joi from "@hapi/joi";
-import { forgotPassword } from "../../../controllers/user";
+import express from 'express';
+import { createValidator } from 'express-joi-validation';
+import Joi from '@hapi/joi';
+import { forgotPassword } from '../../../controllers/user';
 const app = express();
 const validator = createValidator({ passError: true });
 
@@ -36,21 +36,16 @@ const validator = createValidator({ passError: true });
  *      description: fail
  */
 
-
 const userSchema = Joi.object({
-  email: Joi.string()
-    .email()
-    .trim()
-    .required()
-    .label("Email")
+  email: Joi.string().email().trim().required().label('Email'),
 });
 
 app.put(
-  "/user/forgot-password",
+  '/user/forgot-password',
   validator.body(userSchema, {
-    joi: { convert: true, allowUnknown: false }
+    joi: { convert: true, allowUnknown: false },
   }),
-  forgotPassword
+  forgotPassword,
 );
 
 export default app;

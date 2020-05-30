@@ -3,9 +3,9 @@
  * @description: It Contain logout router/api.
  * @author: Jasdeep Singh
  */
-import express from "express";
-import { logout } from "../../../controllers/user";
-import { checkToken } from "../../../utilities/universal";
+import express from 'express';
+import { logout } from '../../../controllers/user';
+import { checkToken } from '../../../utilities/universal';
 
 const app = express();
 
@@ -30,6 +30,6 @@ const app = express();
  *      description: fail
  */
 
-app.delete("/user/logout", checkToken, logout);
+app.delete('/user/logout', checkToken, logout);
 
 export default app;

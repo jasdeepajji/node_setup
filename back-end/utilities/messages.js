@@ -25,22 +25,22 @@ export default {
   passEmail: 'Your password is sent on your register email.',
   updatePassword: 'Password is updated successfully.',
   /************* Competitions ****************/
-  competitionAdded: "Competition added successfully.",
-  competitionUpdated: "Competition updated successfully.",
-  competitionDeleted: "Competition successfully deleted.",
+  competitionAdded: 'Competition added successfully.',
+  competitionUpdated: 'Competition updated successfully.',
+  competitionDeleted: 'Competition successfully deleted.',
   /************* Promo Code ****************/
-  codeAdded: "Promo Code added successfully.",
-  codeUpdated: "Promo Code updated successfully.",
-  codeDeleted: "Promo Code successfully deleted.",
-  promoCodeNotExist: "Promo code does not exist.",
+  codeAdded: 'Promo Code added successfully.',
+  codeUpdated: 'Promo Code updated successfully.',
+  codeDeleted: 'Promo Code successfully deleted.',
+  promoCodeNotExist: 'Promo code does not exist.',
   /*************** Game Play **************/
-  scoreUpdated: "Game score successfully updated.",
-  paymentFaild: "Please try again!",
-  noCompetitionActive: "No Active competition!",
+  scoreUpdated: 'Game score successfully updated.',
+  paymentFaild: 'Please try again!',
+  noCompetitionActive: 'No Active competition!',
   /********* OTP ************/
-  otpSent: "OTP sent on your number.",
-  invalidOtp: "Invalid OTP!.",
-  otpVerified: "OTP is successfully verified.",
-  otpMessage: otp => `hi\n your otp is: ${otp}.`,
-  otpSubject: "OTP"
+  otpSent: 'OTP sent on your number.',
+  invalidOtp: 'Invalid OTP!.',
+  otpVerified: 'OTP is successfully verified.',
+  otpMessage: (otp) => `hi\n your otp is: ${otp}.`,
+  otpSubject: 'OTP',
 };

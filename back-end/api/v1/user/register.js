@@ -25,7 +25,7 @@ const validator = createValidator({ passError: true });
  *        schema:
  *         type: object
  *         required:
- *          - user signup 
+ *          - user signup
  *         properties:
  *           firstName:
  *             type: string
@@ -52,7 +52,7 @@ const validator = createValidator({ passError: true });
  *              coordinates:
  *               type: array
  *               items:
- *                type: number      
+ *                type: number
  *               required:
  *             required:
  *           role:
@@ -66,52 +66,30 @@ const validator = createValidator({ passError: true });
  */
 
 const regiterSchema = Joi.object({
-    firstName: Joi.string()
-        .trim()
-        .required()
-        .label("First Name"),
-    lastName: Joi.string()
-        .trim()
-        .optional()
-        .allow('')
-        .label("Last Name"),
-    username: Joi.string()
-        .trim()
-        .required()
-        .label("Username"),
-    email: Joi.string()
-        .trim()
-        .email()
-        .lowercase()
-        .required()
-        .label("Email"),
-    password: Joi.string()
-        .trim()
-        .required()
-        .label("Password"),       
-    country: Joi.string()
-        .trim()
-        .optional()
-        .allow('')
-        .label("Country"),    
-    address: Joi.string()
-        .trim()
-        .required()
-        .label("Address"),
-    location: Joi.object({
-        coordinates: Joi.array().required().label("coordinates")
-        })
-        .required()
-        .label("location"),
-    role: Joi.number()
-        .valid(ROLE.admin, ROLE.client, ROLE.trader)
-        .required()
-        .label("Role")
+  firstName: Joi.string().trim().required().label('First Name'),
+  lastName: Joi.string().trim().optional().allow('').label('Last Name'),
+  username: Joi.string().trim().required().label('Username'),
+  email: Joi.string().trim().email().lowercase().required().label('Email'),
+  password: Joi.string().trim().required().label('Password'),
+  country: Joi.string().trim().optional().allow('').label('Country'),
+  address: Joi.string().trim().required().label('Address'),
+  location: Joi.object({
+    coordinates: Joi.array().required().label('coordinates'),
+  })
+    .required()
+    .label('location'),
+  role: Joi.number()
+    .valid(ROLE.admin, ROLE.client, ROLE.trader)
+    .required()
+    .label('Role'),
 });
 
-app.post('/user/register'
-    , validator.body(regiterSchema, {
-        joi: { convert: true, allowUnknown: false }
-    }), register);
+app.post(
+  '/user/register',
+  validator.body(regiterSchema, {
+    joi: { convert: true, allowUnknown: false },
+  }),
+  register,
+);
 
 export default app;

@@ -28,7 +28,7 @@ class UserClass {
         ...payload,
         deviceToken: device.token,
         deviceType: device.type
-      }
+      };
     }
     let updateData = {
       $push: { loginToken: payload },
@@ -45,10 +45,13 @@ class UserClass {
     };
     return this.findByIdAndUpdate(userId, updateData);
   }
-  static updateUser(userId, payload) {
-    let updateData = {
+  static updateUser(userId, payload, pushData = null) {
+    let updateData = {      
       $set: payload
     };
+    if(pushData){
+      updateData = {...updateData, $push: pushData};
+    }
     return this.findByIdAndUpdate(userId, updateData);
   }
 }

@@ -9,7 +9,7 @@ import config from 'config';
 import User from '../collections/user';
 import { failAction } from './response';
 import Message from './messages';
-import {SOCIAL} from './constants';
+import { SOCIAL } from './constants';
 const { jwtAlgo, jwtKey } = config.get('app');
 const saltRounds = 10;
 
@@ -40,10 +40,10 @@ export const generateRandom = (length = 32, alphanumeric = true) => {
   return data;
 };
 /*********** Generate JWT token *************/
-export const generateToken = data =>
+export const generateToken = (data) =>
   jwt.sign(data, jwtKey, { algorithm: jwtAlgo, expiresIn: '90d' });
 /*********** Decode JWT token *************/
-export const decodeToken = token => jwt.verify(token, jwtKey);
+export const decodeToken = (token) => jwt.verify(token, jwtKey);
 /*********** Verify token *************/
 export const checkToken = async (req, res, next) => {
   const token = req.headers['authorization'];
@@ -55,7 +55,7 @@ export const checkToken = async (req, res, next) => {
   }
   const user = await User.checkToken(token);
   if (user) {
-    req.user = {...decoded, token};
+    req.user = { ...decoded, token };
     next();
   } else {
     res.status(401).json(failAction(Message.unauthorizedUser, 401));
@@ -64,14 +64,14 @@ export const checkToken = async (req, res, next) => {
 
 /********* Get login type ***********/
 export const getLoginType = (type) => {
-  switch(type){
+  switch (type) {
     case SOCIAL.fbId:
-    return "facebook";
+      return 'facebook';
     case SOCIAL.googleId:
-    return "google";
+      return 'google';
     case SOCIAL.twitterId:
-    return "twitter";
+      return 'twitter';
     default:
-    return "default";
+      return 'default';
   }
-}
+};

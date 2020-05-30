@@ -3,11 +3,11 @@
  * @description: It Contain change-password router/api.
  * @author: Jasdeep Singh
  */
-import express from "express";
-import { createValidator } from "express-joi-validation";
-import Joi from "@hapi/joi";
+import express from 'express';
+import { createValidator } from 'express-joi-validation';
+import Joi from '@hapi/joi';
 import { checkToken } from '../../../utilities/universal';
-import { changePassword } from "../../../controllers/user";
+import { changePassword } from '../../../controllers/user';
 const app = express();
 const validator = createValidator({ passError: true });
 
@@ -17,7 +17,7 @@ const validator = createValidator({ passError: true });
  *  put:
  *   tags: ["user"]
  *   summary: Change password api for all Users
- *   description: api used to change password for users.
+ *   description: api used to change password for users.<br/><b>type</b> should be one of reset OR update.
  *   security:
  *    - OAuth2: [admin]   # Use Authorization
  *   parameters:
@@ -36,6 +36,9 @@ const validator = createValidator({ passError: true });
  *           password:
  *             type: string
  *             required:
+ *           type:
+ *             type: string
+ *             required:
  *   responses:
  *    '200':
  *      description: success
@@ -43,20 +46,22 @@ const validator = createValidator({ passError: true });
  *      description: fail
  */
 
-
 const userSchema = Joi.object({
-  password: Joi.string()
+  password: Joi.string().trim().required().label('Password'),
+  type: Joi.string()
     .trim()
     .required()
-    .label("Password")
+    .valid('reset', 'update')
+    .label('Password Type'),
 });
 
 app.put(
-  "/user/password",
+  '/user/password',
   validator.body(userSchema, {
-    joi: { convert: true, allowUnknown: false }
-  }), checkToken,
-  changePassword
+    joi: { convert: true, allowUnknown: false },
+  }),
+  checkToken,
+  changePassword,
 );
 
 export default app;
