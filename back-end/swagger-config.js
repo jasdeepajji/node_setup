@@ -16,9 +16,10 @@ const swaggerOptions = {
             contact: {
                 name: 'Jasdeep Singh'
             },
-            servers: `${host}${port}`
+            servers: `${host}:${port}`
         },
-        produces: ['application/json']
+        produces: ['application/json'],
+        host: `${host}:${port}`
     },
     apis: ['./*/*/*/*.js']
 };
